@@ -1,8 +1,10 @@
 import type { FormEvent } from "react";
+import { useNavigate } from "react-router";
 
-import { appTitle } from "~/constants";
+import { appTitle, userFields } from "~/constants";
 import type { Route } from "./+types";
-import { fields } from "./constants";
+import { paths } from "~/routes";
+import { Input, Label, Select } from "./components";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,6 +14,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -23,6 +27,8 @@ export default function Home() {
     };
 
     console.log("Form data:", data);
+
+    navigate(paths.recommendations);
   };
 
   return (
@@ -34,21 +40,18 @@ export default function Home() {
               Personal Details
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-              {Object.entries(fields).map(([key, value]) => (
-                <div key={key}>
-                  <label
-                    htmlFor={key}
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    {value.title}
-                  </label>
-                  <input
-                    {...value.settings}
-                    name={key}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                  />
-                </div>
-              ))}
+              <Label field={userFields.height} />
+              <div className="flex gap-4">
+                <Input field={userFields.height} />
+                <Select field={userFields.heightUnit} />
+              </div>
+              <Label field={userFields.weight} />
+              <div className="flex gap-4">
+                <Input field={userFields.weight} />
+                <Select field={userFields.weightUnit} />
+              </div>
+              <Label field={userFields.birthDate} />
+              <Input field={userFields.birthDate} />
               <button
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"

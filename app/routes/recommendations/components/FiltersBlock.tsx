@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import { useMemo, useState } from "react";
 
 import type { IService, SortOptionsType } from "~/types";
+import { userFields } from "~/constants";
+import { paths } from "~/routes";
 
 const defaultSortOptions: Record<
   SortOptionsType,
@@ -43,12 +45,18 @@ export const FiltersBlock = ({ services }: { services: IService[] }) => {
     <div className="w-full space-y-8 grid-cols-1 mb-10">
       <div className="relative bg-white shadow-sm md:rounded-lg p-6">
         <div className="flex flex-col items-center justify-between pb-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4 border-b-1 border-b-gray-200">
-          <div>
-            <span className="text-gray-800 text-md font-bold">Total:</span>
-            <span className="text-gray-400 text-md pl-2">124</span>
+          <div className="flex">
+            {Object.entries(userFields).map(([key, value]) => (
+              <div key={key}>
+                <span className="text-gray-800 text-md font-bold">
+                  {value.title}:
+                </span>
+                <span className="text-gray-400 text-md pl-1 pr-8">1242</span>
+              </div>
+            ))}
           </div>
           <Link
-            to="/"
+            to={paths.home}
             className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-lg md:w-auto bg-primary-700 hover:bg-primary-800"
           >
             Change your details
@@ -69,8 +77,8 @@ export const FiltersBlock = ({ services }: { services: IService[] }) => {
                 aria-hidden="true"
               >
                 <path
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                 />
               </svg>
