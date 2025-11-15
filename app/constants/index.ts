@@ -68,5 +68,5 @@ export const userFields: {
 };
 
 export const apiRoutes = {
-  recommendations: "/api/recommendations",
+  recommendations: `${import.meta.env.VITE_BACKEND_SERVICE_URL}/api/recommendations`,
 };
