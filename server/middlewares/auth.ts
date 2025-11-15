@@ -1,8 +1,8 @@
 import auth from "basic-auth";
 import type { IncomingMessage, ServerResponse } from "http";
 
-const USERNAME = process.env.USERNAME;
-const PASSWORD = process.env.PASSWORD;
+const USERNAME = process.env.AUTH_USERNAME;
+const PASSWORD = process.env.AUTH_PASSWORD;
 
 export const basicAuthMiddleware = (
   req: IncomingMessage,
