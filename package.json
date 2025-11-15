@@ -6,7 +6,7 @@
     "build": "react-router build",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\" --names \"server,client\" --prefix-colors \"yellow,cyan\"",
     "dev:client": "react-router dev",
-    "dev:server": "SERVER_PORT=3001 tsx watch server/index.ts",
+    "dev:server": "tsx watch server/index.ts",
     "lint": "eslint .",
     "typecheck": "react-router typegen && tsc",
     "prepare": "husky"

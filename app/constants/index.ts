@@ -26,8 +26,8 @@ export const userFields: {
         value: "cm",
       },
       {
-        name: "feet",
-        value: "feet",
+        name: "ft",
+        value: "ft",
       },
     ],
   },
@@ -52,8 +52,8 @@ export const userFields: {
         value: "kg",
       },
       {
-        name: "pounds",
-        value: "pounds",
+        name: "lbs",
+        value: "lbs",
       },
     ],
   },
@@ -65,4 +65,8 @@ export const userFields: {
       required: true,
     },
   },
+};
+
+export const apiRoutes = {
+  recommendations: "/api/recommendations",
 };

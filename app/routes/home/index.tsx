@@ -2,8 +2,10 @@ import type { FormEvent } from "react";
 import { useNavigate } from "react-router";
 
 import { appTitle, userFields } from "~/constants";
-import type { Route } from "./+types";
 import { paths } from "~/routes";
+import { useUserData } from "~/contexts";
+import type { UserData } from "~/types";
+import type { Route } from "./+types";
 import { Input, Label, Select } from "./components";
 
 export function meta({}: Route.MetaArgs) {
@@ -15,19 +17,21 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const navigate = useNavigate();
+  const { setUserData } = useUserData();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data = {
-      height: formData.get("height"),
-      weight: formData.get("weight"),
-      birthDate: formData.get("birthDate"),
-    };
+    const data = Object.values(userFields).reduce(
+      (acc, { name }) => ({
+        ...acc,
+        [name]: formData.get(name),
+      }),
+      {}
+    );
 
-    console.log("Form data:", data);
-
+    setUserData(data as UserData);
     navigate(paths.recommendations);
   };
 
