@@ -1,12 +1,11 @@
-import type { HeightUnit, WeightUnit } from "server/types";
-
-export const heightUnits: Record<
+import type {
   HeightUnit,
-  {
-    title: string;
-    valueInCm: number;
-  }
-> = {
+  HeightUnitConfig,
+  WeightUnit,
+  WeightUnitConfig,
+} from "server/types";
+
+export const heightUnits: Record<HeightUnit, HeightUnitConfig> = {
   cm: {
     title: "cm",
     valueInCm: 1,
@@ -17,13 +16,7 @@ export const heightUnits: Record<
   },
 };
 
-export const weightUnits: Record<
-  WeightUnit,
-  {
-    title: string;
-    valueInKg: number;
-  }
-> = {
+export const weightUnits: Record<WeightUnit, WeightUnitConfig> = {
   kg: {
     title: "kg",
     valueInKg: 1,

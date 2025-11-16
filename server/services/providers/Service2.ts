@@ -33,10 +33,7 @@ export class Service2 extends BaseRecommendationService<
   Error
 > {
   constructor() {
-    super(
-      "Service2",
-      "https://a2da22tugdqsame4ckd3oohkmu0tnbne.lambda-url.eu-central-1.on.aws/services/service2"
-    );
+    super("Service2", process.env.SERVICE2_URL!);
   }
 
   normalizeInput(query: RecommendationQuery): Request {

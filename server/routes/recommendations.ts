@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 
-import { Service1, Service2 } from "server/services/providers";
+import { Service1, Service2 } from "../services/providers";
 import type { RecommendationQuery } from "../types";
 
 // Initialize service instances
@@ -21,19 +21,7 @@ const providersArray = services.map((el) => ({
  */
 export const getRecommendations: RequestHandler = async (req, res) => {
   try {
-    const query = req.query as unknown as RecommendationQuery;
-
-    if (
-      !query.birthDate ||
-      !query.height ||
-      !query.heightUnit ||
-      !query.weight ||
-      !query.weightUnit
-    ) {
-      res.status(400).json({ error: "Not valid query params" });
-      return;
-    }
-
+    const query = req.validatedQuery as RecommendationQuery;
     const results = await Promise.allSettled(
       providersArray.map((el) => el.resolver(query))
     );
@@ -55,7 +43,7 @@ export const getRecommendations: RequestHandler = async (req, res) => {
 
     res.json(data);
   } catch (error) {
-    console.error("/api/recommendations failed:", error);
+    console.error("/api/recommendations failed:", error); // TODO: Error logging
     res.status(500).json([]);
     return;
   }

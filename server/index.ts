@@ -2,7 +2,8 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 
-import { getRecommendations } from "./routes/recommendations";
+import { validateRecommendationsQuery } from "./validation";
+import { getRecommendations } from "./routes";
 
 const port = process.env.SERVER_PORT;
 const app = express();
@@ -13,7 +14,11 @@ app.use(
   })
 );
 
-app.get("/api/recommendations", getRecommendations);
+app.get(
+  "/api/recommendations",
+  validateRecommendationsQuery,
+  getRecommendations
+);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
