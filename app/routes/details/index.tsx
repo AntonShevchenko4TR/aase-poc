@@ -1,4 +1,5 @@
 import type { FormEvent } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { appTitle, userFields } from "~/constants";
@@ -6,18 +7,27 @@ import { paths } from "~/routes";
 import { useUserData } from "~/contexts";
 import type { UserData } from "~/types";
 import type { Route } from "./+types";
-import { Input, Label, Select } from "./components";
+import { Input, Label, Select } from "~/components";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: appTitle },
-    { name: "description", content: "Health and Activity Recommender" },
+    { title: `${appTitle} | Health & Activity Recommendations` },
+    {
+      name: "description",
+      content: "Provide details for Health and Activity Recommender",
+    },
   ];
 }
 
-export default function Home() {
+export default function Details() {
   const navigate = useNavigate();
-  const { setUserData } = useUserData();
+  const { setUserData, isLoggedIn } = useUserData();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(paths.login);
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

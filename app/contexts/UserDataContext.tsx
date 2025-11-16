@@ -5,6 +5,8 @@ import type { UserData } from "~/types";
 interface UserDataContextType {
   userData: UserData | null;
   setUserData: (data: UserData) => void;
+  isLoggedIn: boolean;
+  setIsLoggedIn: (value: boolean) => void;
 }
 
 const UserDataContext = createContext<UserDataContextType | undefined>(
@@ -13,9 +15,10 @@ const UserDataContext = createContext<UserDataContextType | undefined>(
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
-    <UserDataContext.Provider value={{ userData, setUserData }}>
+    <UserDataContext.Provider value={{ userData, setUserData, isLoggedIn, setIsLoggedIn }}>
       {children}
     </UserDataContext.Provider>
   );

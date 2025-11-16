@@ -23,7 +23,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Recommendations() {
   const navigate = useNavigate();
-  const { userData } = useUserData();
+  const { userData, isLoggedIn } = useUserData();
   const didFetch = useRef(false);
 
   const [loading, setLoading] = useState(true);
@@ -66,8 +66,13 @@ export default function Recommendations() {
   };
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(paths.login);
+      return;
+    }
+
     if (!userData) {
-      navigate(paths.home);
+      navigate(paths.details);
       return;
     }
 
@@ -75,7 +80,7 @@ export default function Recommendations() {
       didFetch.current = true;
       fetchRecommendations(userData);
     }
-  }, [userData, navigate]);
+  }, [userData, isLoggedIn, navigate]);
 
   if (!userData || loading) {
     return <Spinner />;

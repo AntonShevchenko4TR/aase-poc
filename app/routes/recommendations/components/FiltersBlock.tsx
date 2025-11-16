@@ -54,7 +54,7 @@ export const FiltersBlock = ({
             />
           </div>
           <Link
-            to={paths.home}
+            to={paths.details}
             className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-lg lg:w-auto bg-primary-700 hover:bg-primary-800"
           >
             Change your details
