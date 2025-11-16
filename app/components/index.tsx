@@ -1,4 +1,5 @@
 export * from "./Spinner";
-export { Input } from "./Input";
-export { Select } from "./Select";
-export { Label } from "./Label";
+export * from "./Input";
+export * from "./Select";
+export * from "./Label";
+export * from "./Button";

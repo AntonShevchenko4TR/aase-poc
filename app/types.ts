@@ -1,7 +1,5 @@
 import type { InputHTMLAttributes } from "react";
 
-export type SortOptionsType = "asc" | "desc";
-
 export interface IUserField {
   name: string;
   settings: InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>;
@@ -9,7 +7,7 @@ export interface IUserField {
   options?: { name: string; value: string }[];
 }
 
-export interface UserData {
+export interface IUserData {
   height: string;
   heightUnit: string;
   weight: string;
@@ -17,14 +15,17 @@ export interface UserData {
   birthDate: string;
 }
 
-export interface Recommendation {
+export interface IRecommendation {
   title: string;
   priority: number;
   description?: string;
 }
 
-export interface RecommendationsResult {
+export interface IRecommendationsResult {
   name: string;
-  data: Recommendation[];
+  data: IRecommendation[];
   error?: string;
+}
+export interface IRecommendationWithService extends IRecommendation {
+  serviceName: string;
 }

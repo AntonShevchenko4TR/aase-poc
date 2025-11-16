@@ -5,9 +5,10 @@ import { useNavigate } from "react-router";
 import { appTitle } from "~/constants";
 import { paths } from "~/routes";
 import { useUserData } from "~/contexts";
-import { Input, Label } from "~/components";
+import { Input, Label, Button } from "~/components";
 import type { Route } from "./+types";
-import type { IUserField } from "~/types";
+
+import { loginFields } from "./index.constants";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -19,30 +20,10 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-const loginFields: Record<string, IUserField> = {
-  username: {
-    name: "username",
-    title: "Login",
-    settings: {
-      type: "text",
-      required: true,
-      placeholder: "Enter your login",
-    },
-  },
-  password: {
-    name: "password",
-    title: "Password",
-    settings: {
-      type: "password",
-      required: true,
-      placeholder: "Enter your password",
-    },
-  },
-};
-
 export default function Login() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useUserData();
+
   const [error, setError] = useState<string>("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -56,6 +37,7 @@ export default function Login() {
     const authUsername = import.meta.env.VITE_AUTH_USERNAME;
     const authPassword = import.meta.env.VITE_AUTH_PASSWORD;
 
+    // TODO: Should be on BackEnd
     if (username === authUsername && password === authPassword) {
       setIsLoggedIn(true);
       navigate(paths.details);
@@ -84,12 +66,7 @@ export default function Login() {
               {error && (
                 <div className="text-red-600 text-sm font-medium">{error}</div>
               )}
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
-              >
-                Sign in
-              </button>
+              <Button type="submit">Sign in</Button>
             </form>
           </div>
         </div>

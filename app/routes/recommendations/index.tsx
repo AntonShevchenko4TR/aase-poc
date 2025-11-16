@@ -1,14 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
-import { apiRoutes, appTitle } from "~/constants";
+import { appTitle } from "~/constants";
 import { useUserData } from "~/contexts";
 import { paths } from "~/routes";
 import { Spinner } from "~/components";
-import { dateToUnixTimestamp } from "~/utils";
-import type { RecommendationsResult, UserData } from "~/types";
+import type {
+  IRecommendationsResult,
+  IRecommendationWithService,
+  IUserData,
+} from "~/types";
 import type { Route } from "./+types";
+
 import { FiltersBlock } from "./components";
+import { fetchRecommendations } from "./utils";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -23,15 +28,16 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Recommendations() {
   const navigate = useNavigate();
-  const { userData, isLoggedIn } = useUserData();
+  const { userData } = useUserData();
   const didFetch = useRef(false);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
   const [recommendations, setRecommendations] = useState<
-    RecommendationsResult[]
+    IRecommendationsResult[]
   >([]);
 
-  const allRecommendations = useMemo(() => {
+  const allRecommendations: IRecommendationWithService[] = useMemo(() => {
     return recommendations
       .flatMap((result) =>
         result.data.map((rec) => ({
@@ -42,35 +48,21 @@ export default function Recommendations() {
       .sort((a, b) => b.priority - a.priority);
   }, [recommendations]);
 
-  const fetchRecommendations = async (userData: UserData) => {
+  const loadRecommendations = async (userData: IUserData) => {
     try {
-      const queryParams = new URLSearchParams({
-        height: userData.height,
-        heightUnit: userData.heightUnit,
-        weight: userData.weight,
-        weightUnit: userData.weightUnit,
-        birthDate: dateToUnixTimestamp(userData.birthDate).toString(),
-      });
-
-      const response = await fetch(
-        `${apiRoutes.recommendations}?${queryParams.toString()}`
-      );
-      const data: RecommendationsResult[] = await response.json();
-
+      setLoading(true);
+      setError("");
+      const data = await fetchRecommendations(userData);
       setRecommendations(data);
     } catch (error) {
       console.error("Error fetching recommendations:", error);
+      setError("Failed to load recommendations");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate(paths.login);
-      return;
-    }
-
     if (!userData) {
       navigate(paths.details);
       return;
@@ -78,9 +70,9 @@ export default function Recommendations() {
 
     if (!didFetch.current) {
       didFetch.current = true;
-      fetchRecommendations(userData);
+      loadRecommendations(userData);
     }
-  }, [userData, isLoggedIn, navigate]);
+  }, [userData, navigate]);
 
   if (!userData || loading) {
     return <Spinner />;
@@ -100,9 +92,14 @@ export default function Recommendations() {
         </div>
         <FiltersBlock recommendations={recommendations} userData={userData} />
         <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:space-y-0">
-          {!allRecommendations.length && (
+          {!allRecommendations.length && !error && (
             <div className="col-span-full text-center text-gray-500">
               No recommendations available
+            </div>
+          )}
+          {error && (
+            <div className="col-span-full text-center text-red-600 text-sm font-medium">
+              {error}
             </div>
           )}
           {allRecommendations.map((rec, i) => (

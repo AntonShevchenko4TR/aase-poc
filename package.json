@@ -15,6 +15,7 @@
     "@react-router/express": "^7.9.6",
     "@react-router/node": "^7.9.6",
     "@react-router/serve": "^7.9.6",
+    "axios": "^1.13.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",

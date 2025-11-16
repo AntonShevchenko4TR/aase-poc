@@ -1,4 +1,9 @@
-import { type RouteConfig, index, route } from "@react-router/dev/routes";
+import {
+  type RouteConfig,
+  index,
+  layout,
+  route,
+} from "@react-router/dev/routes";
 
 export const paths = {
   login: "/",
@@ -8,6 +13,8 @@ export const paths = {
 
 export default [
   index("./routes/login/index.tsx"),
-  route(paths.details, "./routes/details/index.tsx"),
-  route(paths.recommendations, "./routes/recommendations/index.tsx"),
+  layout("./routes/layout.tsx", [
+    route(paths.details, "./routes/details/index.tsx"),
+    route(paths.recommendations, "./routes/recommendations/index.tsx"),
+  ]),
 ] satisfies RouteConfig;

@@ -1,27 +1,29 @@
 import { Link } from "react-router";
 import { useCallback, useMemo } from "react";
 
-import type { RecommendationsResult, UserData } from "~/types";
+import type { IRecommendationsResult, IUserData } from "~/types";
 import { userFields } from "~/constants";
 import { paths } from "~/routes";
 
 import { FieldLabel } from "./FieldLabel";
 
+interface FiltersBlockProps {
+  recommendations: IRecommendationsResult[];
+  userData: IUserData;
+}
+
 export const FiltersBlock = ({
   recommendations,
   userData,
-}: {
-  recommendations: RecommendationsResult[];
-  userData: UserData;
-}) => {
+}: FiltersBlockProps) => {
   const servicesLength = useMemo(
     () => recommendations.length,
     [recommendations]
   );
 
   const getButtonClasses = useCallback(
-    (service: RecommendationsResult, index: number) => {
-      const isWithData = service.data.length;
+    (service: IRecommendationsResult, index: number) => {
+      const isWithData = !!service.data.length;
       const isWithError = service.error;
 
       return [
@@ -65,16 +67,22 @@ export const FiltersBlock = ({
             className="inline-flex flex-col w-full rounded-md md:w-auto md:flex-row gap-[1px]"
             role="group"
           >
-            {recommendations.map((el, i) => {
-              return (
-                <div
-                  key={el.name}
-                  className={`px-4 py-2 text-sm font-medium ${getButtonClasses(el, i).join(" ")}`}
-                >
-                  {el.name}
-                </div>
-              );
-            })}
+            {recommendations.map((el, i) => (
+              <div
+                key={el.name}
+                className={`relative group px-4 py-2 text-sm font-medium cursor-default ${getButtonClasses(el, i).join(" ")}`}
+              >
+                {el.name}
+                {el.error && (
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block z-10 pointer-events-none">
+                    <div className="bg-gray-900 text-white text-xs rounded py-2 px-3 whitespace-nowrap">
+                      Service is not available
+                      <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>

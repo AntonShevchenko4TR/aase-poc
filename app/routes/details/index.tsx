@@ -1,13 +1,12 @@
 import type { FormEvent } from "react";
-import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { appTitle, userFields } from "~/constants";
 import { paths } from "~/routes";
 import { useUserData } from "~/contexts";
-import type { UserData } from "~/types";
+import type { IUserData } from "~/types";
 import type { Route } from "./+types";
-import { Input, Label, Select } from "~/components";
+import { Input, Label, Select, Button } from "~/components";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,13 +20,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Details() {
   const navigate = useNavigate();
-  const { setUserData, isLoggedIn } = useUserData();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate(paths.login);
-    }
-  }, [isLoggedIn, navigate]);
+  const { setUserData } = useUserData();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +34,7 @@ export default function Details() {
       {}
     );
 
-    setUserData(data as UserData);
+    setUserData(data as IUserData);
     navigate(paths.recommendations);
   };
 
@@ -66,12 +59,7 @@ export default function Details() {
               </div>
               <Label field={userFields.birthDate} />
               <Input field={userFields.birthDate} />
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
-              >
-                Get recommendations
-              </button>
+              <Button type="submit">Get recommendations</Button>
             </form>
           </div>
         </div>
