@@ -17,4 +17,5 @@ export default [
     route(paths.details, "./routes/details/index.tsx"),
     route(paths.recommendations, "./routes/recommendations/index.tsx"),
   ]),
+  route("*", "./routes/not-found/index.tsx"),
 ] satisfies RouteConfig;
