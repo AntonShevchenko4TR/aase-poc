@@ -14,8 +14,14 @@
    ```
 
 3. **Start Client and Server:**
+
    ```
    npm run dev
+   ```
+
+4. **Open the App:**
+   ```
+   http://localhost:5173
    ```
 
 ## The Customer
