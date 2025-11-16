@@ -1,11 +1,11 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./../tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",
     "target": "ES2022",
-    "outDir": "./build/server",
-    "rootDir": "./server",
+    "outDir": "./../build/server",
+    "rootDir": "./",
     "noEmit": false,
     "declaration": false,
     "sourceMap": false,
@@ -15,6 +15,6 @@
     "verbatimModuleSyntax": false,
     "types": ["node"]
   },
-  "include": ["server/**/*"],
-  "exclude": ["node_modules", "build", "app", "public"]
+  "include": ["**/*", "./package.json"],
+  "exclude": ["node_modules"]
 }
