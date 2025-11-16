@@ -41,7 +41,7 @@ export const FiltersBlock = ({
     <div className="w-full space-y-8 grid-cols-1 mb-10">
       <div className="relative bg-white shadow-sm md:rounded-lg p-6">
         <div className="flex flex-col items-center justify-between pb-4 space-y-3 lg:flex-row lg:space-y-0 lg:space-x-4 border-b-1 border-b-gray-200">
-          <div className="flex">
+          <div className="flex flex-col md:flex-row w-full md:w-auto">
             <FieldLabel
               title={userFields.height.title}
               description={`${userData.height} ${userData.heightUnit}`}
