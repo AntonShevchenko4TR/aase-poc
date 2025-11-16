@@ -1,5 +1,23 @@
 # Pre-sale Case: Health and Activity Recommender
 
+## Installation
+
+1. **Set Up Environment Variables:**
+
+- Make a copy of the `example.env` file and rename it to `.env`:
+- Open the `.env` file and set your environment variables
+
+2. **Install Dependencies:**
+
+   ```
+   npm install
+   ```
+
+3. **Start Client and Server:**
+   ```
+   npm run dev
+   ```
+
 ## The Customer
 
 FunWithActivity is a big company who is a world leader in the area of health applications. They finally decided that they're going to crash the fitness trackers and health monitors market by creating best in class application that is going to work with any physical hardware available on the market as well as provide state-of-the-art tips and recommendations on behaviour. Think about getting advise on the sleeping patterns, how much water to drink, how many push-ups to do, etc
