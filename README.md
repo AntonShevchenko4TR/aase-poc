@@ -4,7 +4,7 @@
 
 1. **Set Up Environment Variables:**
 
-- Make a copy of the `example.env` file and rename it to `.env`:
+- Make a copy of the `example.env` file and rename it to `.env`
 - Open the `.env` file and set your environment variables
 
 2. **Install Dependencies:**
@@ -20,7 +20,7 @@
 
 ## The Customer
 
-FunWithActivity is a big company who is a world leader in the area of health applications. They finally decided that they're going to crash the fitness trackers and health monitors market by creating best in class application that is going to work with any physical hardware available on the market as well as provide state-of-the-art tips and recommendations on behaviour. Think about getting advise on the sleeping patterns, how much water to drink, how many push-ups to do, etc
+FunWithActivity is a big company who is a world leader in the area of health applications. They finally decided that they're going to crash the fitness trackers and health monitors market by creating best in class application that is going to work with any physical hardware available on the market as well as provide state-of-the-art tips and recommendations on behaviour. Think about getting advice on the sleeping patterns, how much water to drink, how many push-ups to do, etc
 
 ## PoC Requirements
 
@@ -107,4 +107,4 @@ FunWithActivity is a big company who is a world leader in the area of health app
   - In your skeleton you should get recommendations data from both endpoints and expose the final list of recommendations in the application. We are expecting skeleton to be written in a similar manner to how you write production code. We're also expecting this to be ready for deployment to cloud environment (ideally deployed into the cloud)
 
 - Artefacts needs to be shared with customer at the end of the day before the session proof of concept and everything else you think will be needed
-- Have your skeleton up and running and you favourite IDE open with the skeleton code as they will ask to do some live coding to address their concern around this area so new features may be added to the skeleton on the fly.
+- Have your skeleton up and running and your favourite IDE open with the skeleton code as they will ask to do some live coding to address their concern around this area so new features may be added to the skeleton on the fly.
