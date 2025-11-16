@@ -91,7 +91,7 @@ export default function Recommendations() {
           </p>
         </div>
         <FiltersBlock recommendations={recommendations} userData={userData} />
-        <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:space-y-0">
+        <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:space-y-0 w-full">
           {!allRecommendations.length && !error && (
             <div className="col-span-full text-center text-gray-500">
               No recommendations available
