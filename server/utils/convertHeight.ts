@@ -1,5 +1,5 @@
-import { heightUnits } from "server/constants";
-import type { HeightUnit } from "server/types";
+import { heightUnits } from "../constants";
+import type { HeightUnit } from "../types";
 
 export function convertHeight(
   value: number,

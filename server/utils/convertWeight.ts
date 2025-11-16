@@ -1,5 +1,5 @@
-import { weightUnits } from "server/constants";
-import type { WeightUnit } from "server/types";
+import { weightUnits } from "../constants";
+import type { WeightUnit } from "../types";
 
 export function convertWeight(
   value: number,

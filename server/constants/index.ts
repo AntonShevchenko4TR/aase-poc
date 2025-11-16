@@ -3,7 +3,7 @@ import type {
   HeightUnitConfig,
   WeightUnit,
   WeightUnitConfig,
-} from "server/types";
+} from "../types";
 
 export const heightUnits: Record<HeightUnit, HeightUnitConfig> = {
   cm: {

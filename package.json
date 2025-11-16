@@ -2,8 +2,11 @@
   "name": "aase-poc",
   "private": true,
   "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "build": "react-router build",
+    "build:server": "tsc --project tsconfig.server.json && cp server/package.json build/server/",
+    "start": "node index.js",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\" --names \"server,client\" --prefix-colors \"yellow,cyan\"",
     "dev:client": "react-router dev",
     "dev:server": "tsx watch server/index.ts",
